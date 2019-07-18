@@ -31,6 +31,8 @@
 
 ## 使用
 
+### 方式一
+
 ![效果图](./asset/img/cab-tool.gif)
 
 **第一步**
@@ -51,7 +53,12 @@
 - 项目路径打开命令行，输入`py main.py`
 
 
+### 方式二
 
+如果你是没有任何python基础的同学，或是懒得安装py环境。没有关系，这里也是支持小白式运行的
+
+- 点击[cab-tool releases](https://github.com/SnailMann/CAB-Tool/releases)，下载`cabtool.exe`的最新版本
+- 双击运行`cabtool.exe`就好啦
 
 
 ## 博客
