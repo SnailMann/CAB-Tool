@@ -49,7 +49,7 @@
 - 确认配置无误后
 - 项目路径打开命令行，输入`py main.py`
 
-
+![效果图](./asset/img/cab-tool.gif)
 
 
 
