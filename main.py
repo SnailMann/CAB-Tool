@@ -21,7 +21,6 @@ def _main():
     Main Logic
     :return:
     """
-    print(GLO_CONFIG)
     # Initialization
     login = Login()
     article_id_spider = ArticleIdSpider()
