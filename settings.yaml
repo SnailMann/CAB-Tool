@@ -1,0 +1,10 @@
+# Settings
+
+# Backup Path
+backup:
+  download-path: D:\csdn-blog-backup
+
+# CSDN Auth
+user:
+  username: your_username
+  password: your_password
