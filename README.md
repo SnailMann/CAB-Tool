@@ -5,9 +5,9 @@
 > 可以将用户在CSDN博客中的markdown文章备份到本地，备份可以有html及markdown版本
 
 <p align="center">
-<img alt="python" src="https://img.shields.io/badge/python-3.7-blue.svg"/>
-<img alt="GitHub release" src="https://img.shields.io/github/release/SnailMann/cab-tool.svg">
-<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/SnailMann/cab-tool.svg?label=update">
+<a href="#"><img alt="python" src="https://img.shields.io/badge/python-3.7-blue.svg"/></a>
+<a href="https://github.com/SnailMann/CAB-Tool/releases"><img alt="GitHub release" src="https://img.shields.io/github/release/SnailMann/CAB-Tool.svg"></a>
+<a href="https://github.com/SnailMann/CAB-Tool/commits"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/SnailMann/CAB-Tool.svg?label=update"></a>
 
 </p>
 
@@ -32,10 +32,22 @@
 ## 使用
 
 
+**第一步**
 
-- 待续
+- 把项目克隆本地`git clone git@github.com:SnailMann/CAB-Tool.git`
+- 确保本地有python3的环境, 并且可以使用pip安装依赖
+- 进入项目目录,命令行输入`pip install -r requirements.txt`，使用pip安装py项目的必要依赖
 
+**第二步**
 
+- 打开`setting.yaml`配置文件
+- 按照yaml规范填写CSDN的账号密码
+- 安装yaml规范在download-path填写本地导出地址,不填默认为`D:\csdn-blog-backup`
+
+**第三步**
+
+- 确认配置无误后
+- 项目路径打开命令行，输入`py main.py`
 
 
 
