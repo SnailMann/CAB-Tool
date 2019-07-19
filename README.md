@@ -2,7 +2,7 @@
 
 > `CAB Tool`是一款针对CSDN进行博客备份的小工具
 > 
-> 可以将用户在CSDN博客中的markdown文章备份到本地，备份可以有html及markdown版本
+> 可以将用户在CSDN博客中的markdown文章(含图片)批量备份到本地，备份可以有html及markdown版本
 
 <p align="center">
 <a href="#"><img alt="python" src="https://img.shields.io/badge/python-3.7-blue.svg"/></a>
@@ -17,7 +17,7 @@
 
 
 - 需要登录账户密码(`markdown编辑器的爬取需要cookies`)
-- 目前不支持备份图片(`后面有空再实现，毕竟懒`)
+- 支持备份博客图片(兼容markdown语法,html语法)
 - 目前不支持备份私密文章，只能备份自己的公开文章
 - `CAB Tool` 直接爬取的是csdn markdown编辑器的文本，备份的文本与编辑器上无异
 - 博客说明:[求人不如求己，自己动手写一个CSDN博客备份小工具？](https://blog.csdn.net/SnailMann/article/details/96474068)
@@ -55,7 +55,8 @@
 
 - 打开`setting.yaml`配置文件
 - 按照yaml规范填写CSDN的账号密码
-- 安装yaml规范在download-path填写本地导出地址,不填默认为`D:\csdn-blog-backup`
+- 按照yaml规范在download-path填写本地导出地址,不填默认为`D:\csdn-blog-backup`
+- 按照yaml规范在download-img填写是否开启图片备份 `True` 或 `False`
 
 **第三步**
 
@@ -65,7 +66,6 @@
 ## 问题
 
 - 有问题请提issue或者email,非常感谢
-- 后续有空再更新图片的备份，定时备份等
 
 ## 博客
 
