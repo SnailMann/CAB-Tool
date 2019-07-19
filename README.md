@@ -13,7 +13,7 @@
 
 ## 介绍
 
-`CAB Tool`  就是**csdn-article-backp-tool**，只是我有点懒，不想打这么长
+`CAB Tool`  就是**csdn-article-backp-tool**，只是我有点懒，不想打这么长,还是顺便装的**一手好逼(狗头)**
 
 
 - 需要登录账户密码(`markdown编辑器的爬取需要cookies`)
