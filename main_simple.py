@@ -46,6 +46,8 @@ def _main():
     print("User %s have a total of %s articles, It's all finished. Please check it." % (
         user['username'], str(len(article_ids))))
 
+    input("--------------------end-----------------------")
+
 
 def _read_config():
     """
