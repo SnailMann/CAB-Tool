@@ -2,6 +2,7 @@ import requests
 import re
 from bs4 import BeautifulSoup
 import math
+import urllib3
 
 
 class ArticleIdSpider:
@@ -34,7 +35,8 @@ class ArticleIdSpider:
         :param url:
         :return:
         """
-        res = requests.get(url)
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+        res = requests.get(url, verify=False)
         html = res.text
         return html
 
