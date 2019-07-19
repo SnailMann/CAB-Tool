@@ -5,7 +5,7 @@
 > 可以将用户在CSDN博客中的markdown文章(含图片)批量备份到本地，备份可以有html及markdown版本
 
 <p align="center">
-<a href="#"><img alt="python" src="https://img.shields.io/badge/python-3.7-blue.svg"/></a>
+<a href="#"><img alt="python" src="https://img.shields.io/badge/python-3.7-red.svg"/></a>
 <a href="https://github.com/SnailMann/CAB-Tool/releases"><img alt="GitHub release" src="https://img.shields.io/github/release/SnailMann/CAB-Tool.svg"></a>
 <a href="https://github.com/SnailMann/CAB-Tool/commits"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/SnailMann/CAB-Tool.svg?label=update"></a>
 
