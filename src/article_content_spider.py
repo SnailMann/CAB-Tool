@@ -7,8 +7,14 @@ import urllib3
 
 class ArticleContentSpider:
     count = 0
+    download_img_flag = False  # download img or not?
+    download_path = ''  # backup path
+    article_url = ''  # url of get article data
+    html_path = ''  # backup html path
+    markdown_path = ''  # backup markdown path
+    img_path = ''  # backup img path
 
-    def getArticle(self, download_path, article_url, article_ids, cookies):
+    def getArticle(self, download_path, download_img, article_url, article_ids, cookies):
         """
         Get article content
         :param url:
@@ -16,13 +22,25 @@ class ArticleContentSpider:
         :param cookies:
         :return:
         """
-        self._mkdir(download_path)  # mkdir backup directory
+
+        # init
+        ArticleContentSpider.download_path = download_path
+        ArticleContentSpider.article_url = article_url
+        ArticleContentSpider.download_img_flag = download_img
+        ArticleContentSpider.html_path = download_path + '\\' + 'html'
+        ArticleContentSpider.markdown_path = download_path + '\\' + 'markdown'
+        ArticleContentSpider.img_path = download_path + '\\' + 'img'
+
+        # mkdir backup directory
+        self._mkdir()
+
+        # get article content
         for id in article_ids:
             # time.sleep(1)
-            article = self._get_markdown(article_url, id, cookies)
-            self._download(download_path, article)
+            article = self._get_markdown(id, cookies)
+            self._download(article)
 
-    def _get_markdown(self, article_url, id, cookies):
+    def _get_markdown(self, id, cookies):
         """
         Get article data from markdown editor
         https://mp.csdn.net/mdeditor/getArticle?id=
@@ -32,7 +50,7 @@ class ArticleContentSpider:
         :param cookies:
         :return:
         """
-        login_url = article_url + id  # assembling
+        login_url = self.__class__.article_url + id  # assembling
         headers = {  # request headers
             'Host': 'mp.csdn.net',
             'Connection': 'keep-alive',
@@ -50,14 +68,14 @@ class ArticleContentSpider:
         article = res.json()
         return article['data']
 
-    def _download(self, download_path, article):
+    def _download(self, article):
         """
         Download article to local storeage
         :param download_path:
         :param article:
         :return:
         """
-        if os.path.exists(download_path):
+        if os.path.exists(self.__class__.download_path):
             # get article title and content
             title = article['title']
             markdown = article['markdowncontent']
@@ -69,16 +87,17 @@ class ArticleContentSpider:
             title = self._validate_title(title)
 
             # download
-            self._download_markdown(download_path, title, markdown)
-            self._download_html(download_path, title, html)
-
+            self._download_markdown(title, markdown)
+            self._download_html(title, html)
+            if self.__class__.download_img_flag:
+                self._download_img(title, markdown)
             ArticleContentSpider.count += 1
             print("[%s] :%s        is Done!!" % (ArticleContentSpider.count, title))
 
         else:
             print('The path is not exists')
 
-    def _download_markdown(self, path, title, markdown):
+    def _download_markdown(self, title, markdown):
         """
         Download the markdown content
         :param path:
@@ -95,13 +114,13 @@ class ArticleContentSpider:
             return
 
         # write
-        path = path + "\\markdown" + "\\" + title + '.md'
+        path = self.__class__.download_path + "\\markdown" + "\\" + title + '.md'
         f = open(path, 'w+', encoding="utf8")
         f.write(markdown)
         f.seek(0)
         f.close()
 
-    def _download_html(self, path, title, html):
+    def _download_html(self, title, html):
         """
         Download the html content
         :param path:
@@ -118,33 +137,92 @@ class ArticleContentSpider:
             return
 
         # write
-        path = path + "\\html" + "\\" + title + '.html'
+        path = self.__class__.download_path + "\\html" + "\\" + title + '.html'
         f = open(path, 'w+', encoding="utf8")
         f.write(html)
         f.seek(0)
         f.close()
 
-    def _mkdir(self, download_path):
+    def _download_img(self, title, markdown):
+        """
+        Download the images
+        :param download_path:
+        :param title:
+        :param markdown:
+        :return:
+        """
+        # check article content
+        if not (title and markdown):
+            print('------------------------------------------------------------------------------')
+            print('Title:' + title)
+            print('No MarkDown Content!!!')
+            print('------------------------------------------------------------------------------')
+            return
+
+        # regular expression matching
+        # picture URLs have two formats as follows :
+        #   (1) html
+        #   <center>
+        #       <img src = "url">
+        #   </center>
+        #
+        #   (2) markdown
+        #   ![picture](url)
+        pic_urls = re.findall(r"!\[[\s\S]*?\]\((.+?)\)", markdown)  # one
+        pic_urls += re.findall(r'.*?img src.*?"(http.+?)">', markdown)  # two
+
+        # remove csdn 'watermarking'
+        pics = []
+        for pic in pic_urls:
+            pic = re.findall('.*(http.*(.png|.jpg|.gif|))[?]?.*', pic)  # support .png .jpg .gif and ''(blank)
+            if pic and pic[0]:
+                pics.append(pic[0])
+
+        # if there is no picture URL that meets the requirements, return
+        if (not pics) or (not pics[0]):
+            return
+        print(title + "    pics size :" + str(len(pics)))
+
+        # create directory
+        article_img_path = self.__class__.img_path + '\\' + title
+        if not os.path.exists(article_img_path):
+            os.makedirs(article_img_path)
+
+        # save the images
+        count = 1
+        for pic in pics:
+            url = pic[0]  # pic url
+            suffix = '.png' if not pic[1] else pic[1]  # if pic[1] is black , default .png
+            html = requests.get(url, verify=False)
+            with open(article_img_path + '\\' + str(count) + suffix, "wb")as f:
+                f.write(html.content)
+                f.seek(0)
+                f.close()
+                count += 1
+
+    def _mkdir(self):
         """
         mkdir directory
         :param download_path:
         :return:
         """
-        html_path = download_path + '\\' + 'html'
-        markdown_path = download_path + '\\' + 'markdown'
 
         # create father directory
-        if not os.path.exists(download_path):
-            os.makedirs(download_path)
-            print('The directory has been created :' + download_path)
+        if not os.path.exists(self.__class__.download_path):
+            os.makedirs(self.__class__.download_path)
+            print('The directory has been created :' + self.__class__.download_path)
 
-        # create son directory (html, markdown)
-        if not os.path.exists(html_path):
-            os.makedirs(html_path)
-            print('The directory has been created :' + html_path)
-        if not os.path.exists(markdown_path):
-            os.makedirs(markdown_path)
-            print('The directory has been created :' + markdown_path)
+        # create son directory (html, markdown,img)
+        if not os.path.exists(self.__class__.html_path):
+            os.makedirs(self.__class__.html_path)
+            print('The directory has been created :' + self.__class__.html_path)
+        if not os.path.exists(self.__class__.markdown_path):
+            os.makedirs(self.__class__.markdown_path)
+            print('The directory has been created :' + self.__class__.markdown_path)
+        if self.__class__.download_img_flag:
+            if not os.path.exists(self.__class__.img_path):
+                os.makedirs(self.__class__.img_path)
+                print('The directory has been created :' + self.__class__.img_path)
 
     def _validate_title(self, title):
         """

@@ -1,10 +1,13 @@
 # Settings
 
-# Backup Path
+# Backup Setting
 backup:
-  download-path: D:\csdn-blog-backup
+  download-path: D:\csdn-blog-backup  # Backup Path
+  download-img: False # Backup Pictures ?
 
 # CSDN Auth
 user:
   username: your_username
   password: your_password
+
+

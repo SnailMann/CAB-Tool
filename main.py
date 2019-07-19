@@ -10,7 +10,8 @@ MARKDOWN_URL = 'https://mp.csdn.net/mdeditor/getArticle?id='
 
 """User Settings"""
 GLO_CONFIG = {
-    'download_path': r"D:\csdn-blog-backup",  # default
+    'download_path': r"D:\csdn-blog-backup",  # Default path
+    'download_img': False,  # Default not to download pictures
     'username': 'username',
     'password': 'password'
 }
@@ -25,6 +26,8 @@ def _main():
     login = Login()
     article_id_spider = ArticleIdSpider()
     article_content_spider = ArticleContentSpider()
+    print("Backup Path : %s" % GLO_CONFIG['download_path'])
+    print("Download Picture Or Not ?  %s" % GLO_CONFIG['download_img'])
 
     # login in csdn and get user data
     user = login.dologin(GLO_CONFIG['username'], GLO_CONFIG['password'])
@@ -33,7 +36,7 @@ def _main():
     global HOME_URL
     article_ids = article_id_spider.getArticleId(HOME_URL + user['username'],
                                                  HOME_URL + user['username'] + PAGE_URL)
-    article_content_spider.getArticle(GLO_CONFIG['download_path'],
+    article_content_spider.getArticle(GLO_CONFIG['download_path'], GLO_CONFIG['download_img'],
                                       MARKDOWN_URL, article_ids, user['cookies'])
 
     # end
@@ -58,9 +61,11 @@ def _read_config():
     GLO_CONFIG['password'] = config['user']['password']
 
     # if the download path is blank, it'll get the default.
-    if not config['backup']['download-path']:
-        return
-    GLO_CONFIG['download_path'] = config['backup']['download-path']
+    if config['backup']['download-path']:
+        GLO_CONFIG['download_path'] = config['backup']['download-path']
+    # download img or not ?
+    if config['backup']['download-img']:
+        GLO_CONFIG['download_img'] = config['backup']['download-img']
 
 
 if __name__ == '__main__':
