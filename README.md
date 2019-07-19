@@ -13,13 +13,14 @@
 
 ## 介绍
 
-`CAB Tool`  就是**csdn-article-backp-tool**，只是我有点懒，不想打这么长
+`CAB Tool`  就是**csdn-article-backp-tool**，只是我有点懒,不想打这么长,还能顺便装的**一手好逼** (狗头)
 
 
 - 需要登录账户密码(`markdown编辑器的爬取需要cookies`)
 - 目前不支持备份图片(`后面有空再实现，毕竟懒`)
 - 目前不支持备份私密文章，只能备份自己的公开文章
 - `CAB Tool` 直接爬取的是csdn markdown编辑器的文本，备份的文本与编辑器上无异
+- 博客说明:[求人不如求己，自己动手写一个CSDN博客备份小工具？](https://blog.csdn.net/SnailMann/article/details/96474068)
 
 
 
