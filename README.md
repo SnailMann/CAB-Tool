@@ -15,6 +15,7 @@
 
 `CAB Tool`  就是**csdn-article-backp-tool**，只是我有点懒,不想打这么长,还能顺便装的**一手好逼** (狗头)
 
+**功能：**
 
 - 支持批量备份markdown语法写的csdn博客
 - 支持备份博客图片(兼容markdown语法,html语法)
