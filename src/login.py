@@ -2,6 +2,10 @@ import json
 import urllib3
 import requests
 
+"""
+Auther : SnailMann
+"""
+
 
 class Login:
 

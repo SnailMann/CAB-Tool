@@ -2,6 +2,10 @@ from src.login import Login
 from src.article_id_spider import ArticleIdSpider
 from src.article_content_spider import ArticleContentSpider
 
+"""
+Auther : SnailMann
+"""
+
 HOME_URL = 'https://blog.csdn.net/'
 PAGE_URL = '/article/list/'
 MARKDOWN_URL = 'https://mp.csdn.net/mdeditor/getArticle?id='

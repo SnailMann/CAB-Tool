@@ -4,6 +4,10 @@ from bs4 import BeautifulSoup
 import math
 import urllib3
 
+"""
+Auther : SnailMann
+"""
+
 
 class ArticleIdSpider:
 

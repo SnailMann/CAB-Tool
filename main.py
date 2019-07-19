@@ -4,6 +4,10 @@ from src.article_content_spider import ArticleContentSpider
 import os
 import yaml
 
+"""
+Auther : SnailMann
+"""
+
 HOME_URL = 'https://blog.csdn.net/'
 PAGE_URL = '/article/list/'
 MARKDOWN_URL = 'https://mp.csdn.net/mdeditor/getArticle?id='

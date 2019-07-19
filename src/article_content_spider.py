@@ -4,6 +4,10 @@ import uuid
 import requests
 import urllib3
 
+"""
+Auther : SnailMann
+"""
+
 
 class ArticleContentSpider:
     count = 0
