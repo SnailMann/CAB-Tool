@@ -185,7 +185,6 @@ class ArticleContentSpider:
         # if there is no picture URL that meets the requirements, return
         if (not pics) or (not pics[0]):
             return
-        print(title + "    pics size :" + str(len(pics)))
 
         # create directory
         article_img_path = self.__class__.img_path + '\\' + title
