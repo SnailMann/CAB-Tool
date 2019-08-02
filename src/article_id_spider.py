@@ -31,6 +31,8 @@ class ArticleIdSpider:
             article_ids = article_ids[1:]
             all_ids += article_ids
 
+        print("Total articles number:", len(all_ids))
+        print("Article ids:", all_ids)
         return all_ids
 
     def _fetch_content(self, url):
