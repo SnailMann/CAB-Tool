@@ -12,6 +12,7 @@ Auther : SnailMann
 
 class ArticleContentSpider:
     count = 0
+    sleep_time = 1  # crawl article interval, the unit is seconds.
     download_img_flag = False  # download img or not?
     download_path = ''  # backup path
     article_url = ''  # url of get article data
@@ -19,7 +20,7 @@ class ArticleContentSpider:
     markdown_path = ''  # backup markdown path
     img_path = ''  # backup img path
 
-    def getArticle(self, download_path, download_img, article_url, article_ids, cookies):
+    def getArticle(self, sleep_time, download_path, download_img, article_url, article_ids, cookies):
         """
         Get article content
         :param url:
@@ -29,6 +30,7 @@ class ArticleContentSpider:
         """
 
         # init
+        ArticleContentSpider.sleep_time = sleep_time
         ArticleContentSpider.download_path = download_path
         ArticleContentSpider.article_url = article_url
         ArticleContentSpider.download_img_flag = download_img
@@ -41,7 +43,7 @@ class ArticleContentSpider:
 
         # get article content
         for id in article_ids:
-            # time.sleep(1)
+            time.sleep(ArticleContentSpider.sleep_time)  # prevent crawling too fast,you can customize this variable
             article = self._get_markdown(id, cookies)
             self._download(article)
 
@@ -114,7 +116,7 @@ class ArticleContentSpider:
         if not (title and markdown):  # Exclude articles written in HTML
             print('------------------------------------------------------------------------------')
             print('Title:' + title)
-            print('No MarkDown Content!!!')
+            print('No MarkDown Content !?')
             print('------------------------------------------------------------------------------')
             return
 
@@ -198,9 +200,7 @@ class ArticleContentSpider:
             url = pic[0]  # pic url
             suffix = '.png' if not pic[1] else pic[1]  # if pic[1] is black , default .png
             try:
-                print("Getting pic:", url)
                 html = requests.get(url, verify=False)
-                time.sleep(3)
                 with open(article_img_path + '\\' + str(count) + suffix, "wb")as f:
                     f.write(html.content)
                     f.seek(0)

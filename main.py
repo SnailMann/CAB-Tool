@@ -16,6 +16,7 @@ MARKDOWN_URL = 'https://mp.csdn.net/mdeditor/getArticle?id='
 GLO_CONFIG = {
     'download_path': r"D:\csdn-blog-backup",  # Default path
     'download_img': False,  # Default not to download pictures
+    'sleep_time': 1,
     'username': 'username',
     'password': 'password'
 }
@@ -30,8 +31,11 @@ def _main():
     login = Login()
     article_id_spider = ArticleIdSpider()
     article_content_spider = ArticleContentSpider()
+    print("==================================================begin====================================================")
     print("Backup Path : %s" % GLO_CONFIG['download_path'])
     print("Download Picture Or Not ?  %s" % GLO_CONFIG['download_img'])
+    print("Crawl article interval : %s seconds" % GLO_CONFIG['sleep_time'])
+    print("===========================================================================================================")
 
     # login in csdn and get user data
     user = login.dologin(GLO_CONFIG['username'], GLO_CONFIG['password'])
@@ -40,13 +44,16 @@ def _main():
     global HOME_URL
     article_ids = article_id_spider.getArticleId(HOME_URL + user['username'],
                                                  HOME_URL + user['username'] + PAGE_URL)
-    article_content_spider.getArticle(GLO_CONFIG['download_path'], GLO_CONFIG['download_img'],
+    article_content_spider.getArticle(GLO_CONFIG['sleep_time'],
+                                      GLO_CONFIG['download_path'], GLO_CONFIG['download_img'],
                                       MARKDOWN_URL, article_ids, user['cookies'])
 
     # end
     print('')
+    print("===========================================================================================================")
     print("User %s have a total of %s articles, It's all finished. Please check it." % (
         user['username'], str(len(article_ids))))
+    input("====================================================end====================================================")
 
 
 def _read_config():
@@ -64,9 +71,14 @@ def _read_config():
     GLO_CONFIG['username'] = config['user']['username']
     GLO_CONFIG['password'] = config['user']['password']
 
+    # get crawl article interval ,default 1 seconds
+    if config['backup']['sleep-time']:
+        GLO_CONFIG['sleep_time'] = config['backup']['sleep-time']
+
     # if the download path is blank, it'll get the default.
     if config['backup']['download-path']:
         GLO_CONFIG['download_path'] = config['backup']['download-path']
+
     # download img or not ?
     if config['backup']['download-img']:
         GLO_CONFIG['download_img'] = config['backup']['download-img']

@@ -4,6 +4,7 @@
 backup:
   download-path: D:\csdn-blog-backup  # Backup Path
   download-img: False # Backup Pictures ?
+  sleep-time: 1 # Crawl article interval, default 1 seconds
 
 # CSDN Auth
 user:
