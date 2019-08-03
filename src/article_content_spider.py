@@ -1,5 +1,6 @@
 import os
 import re
+import time
 import uuid
 import requests
 import urllib3
@@ -196,12 +197,17 @@ class ArticleContentSpider:
         for pic in pics:
             url = pic[0]  # pic url
             suffix = '.png' if not pic[1] else pic[1]  # if pic[1] is black , default .png
-            html = requests.get(url, verify=False)
-            with open(article_img_path + '\\' + str(count) + suffix, "wb")as f:
-                f.write(html.content)
-                f.seek(0)
-                f.close()
-                count += 1
+            try:
+                print("Getting pic:", url)
+                html = requests.get(url, verify=False)
+                time.sleep(3)
+                with open(article_img_path + '\\' + str(count) + suffix, "wb")as f:
+                    f.write(html.content)
+                    f.seek(0)
+                    f.close()
+                    count += 1
+            except requests.exceptions.ConnectionError:
+                print("Cannot download pic, skip this time:", pic[0])
 
     def _mkdir(self):
         """
