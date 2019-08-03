@@ -160,10 +160,7 @@ class ArticleContentSpider:
         """
         # check article content
         if not (title and markdown):
-            print('------------------------------------------------------------------------------')
-            print('Title:' + title)
-            print('No MarkDown Content!!!')
-            print('------------------------------------------------------------------------------')
+            print("Because there is no Markdown content, you can't download pictures.")
             return
 
         # regular expression matching
