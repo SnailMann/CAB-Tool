@@ -86,11 +86,13 @@
 ## 问题
 
 - 笔者自己的测试中，自己90+的文章，图片都是能安全备份下来的的，如果有几百或上千篇，理论上也是ok的，但未经过测试
-- 有问题请提issue或者email, 同时欢迎fork和pull requests参与，如果一直没有动静，可能是忘了，及时email哈，非常感谢！
+- 有问题请提issue或者email, 同时欢迎fork和pull requests参与，非常感谢！
 
 ## 博客
 
 
+- Gmail : `snailmann.me@gmail.com`
+- WeChat: `go_snailmann`
 
 
 **本撸的博客是[https://blog.csdn.net/SnailMann](https://blog.csdn.net/SnailMann)，如果对你有帮助，记得关个注，点个赞哟？！**
