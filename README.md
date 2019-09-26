@@ -54,8 +54,7 @@
 
 
 
-### 方式一
-
+### 方式一[！失效！]
 如果你是没有任何python基础的同学，或是懒得安装py环境。没有关系，这里也是支持小白式运行的
 
 - 点击[cab-tool releases](https://github.com/SnailMann/CAB-Tool/releases)，下载`cabtool.exe`的最新版本
@@ -63,7 +62,7 @@
 
 
 
-### 方式二
+### 方式二[！失效！]
 
 ![效果图](./asset/img/cab-tool.gif)
 
@@ -85,6 +84,29 @@
 
 - 确认配置无误后
 - 项目路径打开命令行，输入`py main.py`
+
+### 方式三
+
+**第一步**
+
+- 把项目克隆本地`git clone git@github.com:SnailMann/CAB-Tool.git`
+- 确保本地有python3的环境, 并且可以使用pip安装依赖
+- 进入项目目录,命令行输入`pip install -r requirements.txt`，使用pip安装py项目的必要依赖
+
+**第二步**
+
+- 打开`main_cookies.py`启动文件
+- 修改并填充`main_cookies.py`文件中的配置信息，重点是copy浏览器的cookies到`GLO_CONFIG`中
+```python
+GLO_CONFIG = {
+    'download_path': r"D:\csdn-blog-backup",  # Default path
+    'download_img': False,  # Default not to download pictures
+    'sleep_time': 1,
+    'name': 'yourname',  # https://blog.csdn.net/yourname <- yourname
+    'cookies': 'yourcookies'
+}
+```
+- 确定配置无误后，在命令行上运行`python main_cookies.py`即可
 
 ## 问题
 
