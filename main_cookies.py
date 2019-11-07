@@ -1,8 +1,5 @@
-from src.login import Login
-from src.article_id_spider import ArticleIdSpider
 from src.article_content_spider import ArticleContentSpider
-import os
-import yaml
+from src.article_id_spider import ArticleIdSpider
 
 """
 Auther : SnailMann

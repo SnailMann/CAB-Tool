@@ -72,11 +72,11 @@ class ArticleIdSpider:
 
         for script_content in scripts:
             # size of per page
-            pre_pagesize = re.findall(r'pageSize = (\d*)', repr(script_content))
+            per_pagesize = re.findall(r'pageSize = (\d*)', repr(script_content))
             # total number of articles
             total_size = re.findall(r'listTotal = (\d*)', repr(script_content))
-            if pre_pagesize and total_size:
+            if per_pagesize and total_size:
                 # math.ceil
-                pagesize = math.ceil(int(total_size[0]) / int(pre_pagesize[0]))
+                pagesize = math.ceil(int(total_size[0]) / int(per_pagesize[0]))
                 break
         return pagesize
