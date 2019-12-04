@@ -72,8 +72,10 @@ class ArticleContentSpider:
         res = requests.get(login_url, headers=headers, verify=False, cookies=cookies)
         res.raise_for_status()
         res.encoding = 'utf-8'
-        article = res.json()
-        return article['data']
+        result = res.json()
+        if result['error'] :
+            raise Exception(result['error'])
+        return result['data']
 
     def _download(self, article):
         """
