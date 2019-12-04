@@ -98,7 +98,7 @@
 - 打开`main_cookies.py`启动文件
 - 修改并填充`main_cookies.py`文件中的配置信息, 比如name , cookies等信息
 - `name` 就是https://blog.csdn.net/yourname的yourname, 比如笔者的就是`SnailMann`
-- `cookies` 就是在浏览器登录csdn后，通过开发者工具随意找一个csdn域名的链接，看看request有没有cookie选项，如果有直接把整串cookie的value拷贝下来即可（可能会比较长，没关系）
+- `cookies` 就是在浏览器登录csdn后，通过开发者工具找一个request有cookie选项的csdn域名的链接，然后把cookie选项的整串value拷贝下来即可（可能会比较长，但没关系）
 
 ```python
 GLO_CONFIG = {
